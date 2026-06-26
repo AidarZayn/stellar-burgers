@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { mainReducer } from './mainReducer';
 
 import {
   TypedUseSelectorHook,
@@ -6,18 +7,16 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = () => {}; // Заменить на импорт настоящего редьюсера
-
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== 'production'
-});
-
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof mainReducer>;
 
 export type AppDispatch = typeof store.dispatch;
 
 export const useDispatch: () => AppDispatch = () => dispatchHook();
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+const store = configureStore({
+  reducer: mainReducer,
+  devTools: process.env.NODE_ENV !== 'production'
+});
 
 export default store;
