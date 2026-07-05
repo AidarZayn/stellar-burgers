@@ -12,6 +12,9 @@ const config: Config = {
         // настройки для ts-jest
       }
     ]
+  },
+  moduleNameMapper: {
+    '^@api$': '<rootDir>/src/utils/burger-api.ts'
   }
 };
 
