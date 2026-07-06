@@ -50,6 +50,8 @@ test.describe('Список ингредиентов с HAR', () => {
     // Открываем главную страницу
     await page.goto('/');
 
+    await expect(page.getByTestId('ingredients-list')).toBeVisible();
+
     // Кликаем на "Добавить"
     await page
       .getByTestId('643d69a5c3f7b9001cfa093c')
