@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-// test('Записываем HAR файл ингредиентов', async ({ page }) => {
-//   await page.routeFromHAR('./e2e/hars/ingredients.har', {
-//     url: '**/ingredients',
-//     update: false
-//   });
-//
-//   await page.goto('/');
-//   await expect(page.getByTestId('ingredients-list')).toBeVisible();
-// });
-
 test.describe('Список ингредиентов с HAR', () => {
+  test('Записываем HAR файл ингредиентов', async ({ page }) => {
+    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+      url: '**/ingredients',
+      update: false
+    });
+
+    await page.goto('/');
+    await expect(page.getByTestId('ingredients-list')).toBeVisible();
+  });
+
   test('должен загрузить ингредиенты из HAR-файла', async ({ page }) => {
     await page.routeFromHAR('./e2e/hars/ingredients.har', {
       url: '**/api/ingredients',
