@@ -39,4 +39,27 @@ test.describe('Список ингредиентов с HAR', () => {
     await page.goto('/');
     await expect(page.getByTestId('ingredients-list')).toBeVisible();
   });
+
+  test('должен добавить булочку и проверить, что она выбралась', async ({
+    page
+  }) => {
+    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+      url: '**/api/ingredients',
+      update: false
+    });
+    // Открываем главную страницу
+    await page.goto('/');
+
+    // Кликаем на "Добавить"
+    await page
+      .getByTestId('643d69a5c3f7b9001cfa093c')
+      .getByRole('button', { name: /Добавить/i })
+      .click();
+    await expect(page.getByTestId('constructor-bun-top')).toContainText(
+      'Краторная булка N-200i (верх)'
+    );
+    await expect(page.getByTestId('constructor-bun-bottom')).toContainText(
+      'Краторная булка N-200i (низ)'
+    );
+  });
 });
