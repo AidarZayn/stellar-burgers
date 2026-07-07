@@ -5,6 +5,7 @@ const config: Config = {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   preset: 'ts-jest',
+  testPathIgnorePatterns: ['<rootDir>/tests/'],
   transform: {
     '^.+\\.tsx?$': [
       'ts-jest',

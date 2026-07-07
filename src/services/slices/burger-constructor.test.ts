@@ -145,12 +145,12 @@ describe('редьюсер burgerConstructor', () => {
     const stateWithData = {
       bun: {
         ...bun,
-        id: 'test-id'
+        id: 'tests-id'
       },
       ingredients: [
         {
           ...filling1,
-          id: 'test-id-1'
+          id: 'tests-id-1'
         }
       ],
       orderRequest: true,

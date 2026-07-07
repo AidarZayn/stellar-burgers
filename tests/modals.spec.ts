@@ -15,25 +15,25 @@ test.describe('Провожу тест модального окна ингре�
 
     await page.getByTestId('643d69a5c3f7b9001cfa093c').click();
 
-    await expect(page.getByTestId('ingredient-modal')).toBeVisible();
+    await expect(page.getByTestId('modal')).toBeVisible();
 
-    await expect(page.getByTestId('ingredient-modal')).toContainText(
+    await expect(page.getByTestId('modal')).toContainText(
       'Краторная булка N-200i'
     );
 
     await page.getByTestId('close-modal').click();
 
-    await expect(page.getByTestId('ingredient-modal')).not.toBeVisible();
+    await expect(page.getByTestId('modal')).not.toBeVisible();
 
     await page.getByTestId('643d69a5c3f7b9001cfa093c').click();
 
-    await expect(page.getByTestId('ingredient-modal')).toBeVisible();
+    await expect(page.getByTestId('modal')).toBeVisible();
 
-    await expect(page.getByTestId('ingredient-modal')).toContainText(
+    await expect(page.getByTestId('modal')).toContainText(
       'Краторная булка N-200i'
     );
 
     await page.keyboard.press('Escape');
-    await expect(page.getByTestId('ingredient-modal')).not.toBeVisible();
+    await expect(page.getByTestId('modal')).not.toBeVisible();
   });
 });
