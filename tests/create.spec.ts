@@ -16,7 +16,7 @@ test.describe('Создание заказа', () => {
     });
 
     // Мок для данных пользователя
-    await page.route('**/auth/user', async route => {
+    await page.route('**/auth/user', async (route) => {
       const mockUser = {
         success: true,
         user: {
@@ -32,7 +32,7 @@ test.describe('Создание заказа', () => {
     });
 
     // Мок для создания заказа
-    await page.route('**/orders', async route => {
+    await page.route('**/orders', async (route) => {
       const mockOrder = {
         success: true,
         name: 'Space burger',
