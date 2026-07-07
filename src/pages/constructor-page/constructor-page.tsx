@@ -14,7 +14,9 @@ export const ConstructorPage: FC = () => {
   return (
     <>
       {isIngredientsLoading ? (
-        <Preloader />
+        <div data-testid='loading-ingredients'>
+          <Preloader />
+        </div>
       ) : (
         <main className={styles.containerMain}>
           <h1
