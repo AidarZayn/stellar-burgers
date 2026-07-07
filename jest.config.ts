@@ -10,7 +10,7 @@ const config: Config = {
     '^.+\\.tsx?$': [
       'ts-jest',
       {
-        // настройки для ts-jest
+        // настройки для ts-jest.
       }
     ]
   },
