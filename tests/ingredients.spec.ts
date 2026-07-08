@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Список ингредиентов с HAR', () => {
   test('Записываем HAR файл ингредиентов', async ({ page }) => {
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/ingredients',
       update: false
     });
@@ -12,7 +12,7 @@ test.describe('Список ингредиентов с HAR', () => {
   });
 
   test('должен загрузить ингредиенты из HAR-файла', async ({ page }) => {
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/api/ingredients',
       update: false
     });
@@ -32,7 +32,7 @@ test.describe('Список ингредиентов с HAR', () => {
   });
 
   test('должен работать без реального сервера', async ({ page }) => {
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/ingredients'
     });
 
@@ -43,7 +43,7 @@ test.describe('Список ингредиентов с HAR', () => {
   test('должен добавить булочку и проверить, что она выбралась', async ({
     page
   }) => {
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/api/ingredients',
       update: false
     });

@@ -4,7 +4,7 @@ test.describe('Провожу тест модального окна ингре�
   test('Проверяем, что есть ингредиенты, далее откроем модальное окно, закроем его кнопкой на крестик, потом откроем снова и закроем уже кликом на фон', async ({
     page
   }) => {
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/api/ingredients',
       update: false
     });

@@ -10,7 +10,7 @@ test.describe('Создание заказа', () => {
     });
 
     // Мок для ингредиентов
-    await page.routeFromHAR('./e2e/hars/ingredients.har', {
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
       url: '**/ingredients',
       update: false
     });
