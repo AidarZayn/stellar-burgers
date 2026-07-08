@@ -2,67 +2,36 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Создание заказа', () => {
   test.beforeEach(async ({ context, page }) => {
-    await context.clearCookies();
-
-    await page.addInitScript(() => {
-      localStorage.clear();
-      sessionStorage.clear();
-    });
-
-    // Мок для ингредиентов
     await page.routeFromHAR('./tests/hars/ingredients.har', {
-      url: '**/ingredients',
+      url: '**/api/ingredients',
       update: false
     });
 
-    // Мок для данных пользователя
-    await page.route('**/auth/user', async (route) => {
-      const mockUser = {
-        success: true,
-        user: {
-          email: 'tests@tests.com',
-          name: 'Test User'
-        }
-      };
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(mockUser)
-      });
+    await context.routeFromHAR('./tests/hars/user.har', {
+      url: '**/api/auth/user',
+      update: false
     });
 
-    // Мок для создания заказа
-    await page.route('**/orders', async (route) => {
-      const mockOrder = {
-        success: true,
-        name: 'Space burger',
-        order: {
-          number: 12345
-        }
-      };
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(mockOrder)
-      });
+    await context.routeFromHAR('./tests/hars/orders.har', {
+      url: '**/api/orders',
+      update: false
     });
 
-    // Подставляем токен авторизации в cookie (как делает приложение)
     await context.addCookies([
       {
         name: 'accessToken',
-        value: 'tests-token',
-        domain: 'localhost',
-        path: '/'
+        value: 'Bearer test-access-token',
+        url: 'http://localhost:4000'
       }
     ]);
 
-    // Также refreshToken в localStorage
     await page.addInitScript(() => {
-      localStorage.setItem('refreshToken', 'tests-refresh-token');
+      localStorage.setItem('refreshToken', 'test-refresh-token');
     });
 
     await page.goto('/');
+
+    console.log(await page.context().cookies());
 
     await expect(page.getByTestId('ingredients-list')).toBeVisible();
   });
@@ -85,6 +54,8 @@ test.describe('Создание заказа', () => {
 
     // Нажимаем "Оформить заказ"
     await page.getByTestId('create-order').click();
+
+    console.log(await page.url());
 
     // Проверяем, что модальное окно открылось
     await expect(page.getByTestId('modal')).toBeVisible({ timeout: 5000 });

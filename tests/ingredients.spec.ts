@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Список ингредиентов с HAR', () => {
   test('Записываем HAR файл ингредиентов', async ({ page }) => {
     await page.routeFromHAR('./tests/hars/ingredients.har', {
-      url: '**/ingredients',
+      url: '**/api/ingredients',
       update: false
     });
 
